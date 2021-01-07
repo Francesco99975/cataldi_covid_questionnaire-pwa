@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TimerService } from 'src/app/services/timer.service';
 import { CovidForm } from './models/covid-form.model';
 
 @Component({
@@ -12,8 +14,10 @@ export class CovidFormScreenComponent implements OnInit {
 
   covidForm: CovidForm;
   form: FormGroup;
+  loading: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpClient, private timer: TimerService) {
+    this.loading = false;
     this.form = new FormGroup({
       firstName: new FormControl("", Validators.required),
       middleName: new FormControl(""),
@@ -36,6 +40,7 @@ export class CovidFormScreenComponent implements OnInit {
 
   onSubmit() {
     if(this.form.valid) {
+      this.loading = true;
       let sym: Map<String, boolean> = new Map([
             ["fever", this.form.get("fever").value],
             ["breath", this.form.get("breath").value],
@@ -56,14 +61,22 @@ export class CovidFormScreenComponent implements OnInit {
           this.form.get("contact").value
       );
 
-      console.log(this.covidForm.toJSON());
-      console.log(this.covidForm.passed());
+      this.http.post("http://localhost:3000/ccq/mail-dev", this.covidForm.toJSON()).subscribe((response) => {
+        console.log(response);
 
-      if(this.covidForm.passed()) {
-        this.router.navigateByUrl('/success', {replaceUrl: true});
-      } else {
-        this.router.navigateByUrl('/fail', {replaceUrl: true});
-      }
+        let ed = new Date();
+        ed.setSeconds(ed.getSeconds() + 20);
+        this.timer.setTimer(true, ed);
+
+        if(this.covidForm.passed()) {
+          this.router.navigateByUrl('/success', {replaceUrl: true});
+        } else {
+          this.router.navigateByUrl('/fail', {replaceUrl: true});
+        }
+      }, (err) => {
+        this.loading = false;
+        console.log(err);
+      });    
     }
   }
 

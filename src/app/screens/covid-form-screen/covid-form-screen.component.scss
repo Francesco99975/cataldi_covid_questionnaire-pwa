@@ -13,6 +13,16 @@ $gray: #9b9b9b;
   align-items: center;
 }
 
+.loading-container {
+  width: 100%;
+  height: 100vh;
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .title {
   color: white;
 }

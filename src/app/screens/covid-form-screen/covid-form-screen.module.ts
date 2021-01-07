@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from "@angular/forms"
+import { HttpClientModule } from "@angular/common/http";
 
 import { CovidFormScreenComponent } from "./covid-form-screen.component";
 import { CovidFormRoutingModule } from "./covid-form-screen-routing.module";
@@ -11,7 +12,8 @@ import { CovidFormRoutingModule } from "./covid-form-screen-routing.module";
   imports: [
     CommonModule,
     CovidFormRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class CovidFormScreenModule { }

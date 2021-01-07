@@ -10,6 +10,7 @@ export class TimerService {
 
   expiryDate: Date;
   completed: boolean = false;
+  timer: any;
   change: Subject<void> = new Subject();
 
   loadTimer() {
@@ -32,8 +33,9 @@ export class TimerService {
   }
 
   private autoWatcher() {
+    if(this.timer) clearTimeout(this.timer);
     const time = this.expiryDate.getTime() - new Date().getTime();
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       this.completed = false;
       localStorage.setItem(this.STATUS_KEY, "0");
       localStorage.setItem(this.EXPIRY_KEY, '');

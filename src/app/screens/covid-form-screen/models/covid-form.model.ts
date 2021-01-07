@@ -23,13 +23,13 @@ export class CovidForm {
     }
 
     hasMiddle(): boolean {
-        return this.middleName === "";
+        return this.middleName !== "";
     }
 
     toJSON() {
         return {
             "firstName": this.firstName,
-            "middlename": this.middleName,
+            "middleName": this.middleName,
             "lastName": this.lastName,
             "symptoms": {
                 "fever": this.symptoms.get('fever'),
@@ -38,11 +38,13 @@ export class CovidForm {
                 "throat": this.symptoms.get('throat'),
                 "nose": this.symptoms.get("nose"),
                 "taste": this.symptoms.get("taste"),
-                "nauea": this.symptoms.get("nausea"),
+                "nausea": this.symptoms.get("nausea"),
                 "tiredness": this.symptoms.get("tiredness")
             },
             "travel": this.travel,
-            "contact": this.contact
+            "contact": this.contact,
+            "hasMiddle": this.hasMiddle(),
+            "passed": this.passed()
         };
     } 
     
