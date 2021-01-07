@@ -6,6 +6,10 @@ const routes: Routes = [
     path: "", 
     loadChildren: () => import('./screens/start-screen/start-screen.module').then(m => m.StartScreenModule) 
   },
+  {
+    path: "form",
+    loadChildren: () => import('./screens/covid-form-screen/covid-form-screen.module').then(m => m.CovidFormScreenModule)
+  }
 ];
 
 @NgModule({
