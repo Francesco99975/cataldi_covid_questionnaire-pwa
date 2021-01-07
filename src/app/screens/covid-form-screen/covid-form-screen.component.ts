@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CovidForm } from './models/covid-form.model';
 
 @Component({
@@ -12,7 +13,7 @@ export class CovidFormScreenComponent implements OnInit {
   covidForm: CovidForm;
   form: FormGroup;
 
-  constructor() {
+  constructor(private router: Router) {
     this.form = new FormGroup({
       firstName: new FormControl("", Validators.required),
       middleName: new FormControl(""),
@@ -57,6 +58,12 @@ export class CovidFormScreenComponent implements OnInit {
 
       console.log(this.covidForm.toJSON());
       console.log(this.covidForm.passed());
+
+      if(this.covidForm.passed()) {
+        this.router.navigateByUrl('/success', {replaceUrl: true});
+      } else {
+        this.router.navigateByUrl('/fail', {replaceUrl: true});
+      }
     }
   }
 

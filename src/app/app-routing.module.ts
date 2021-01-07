@@ -9,6 +9,14 @@ const routes: Routes = [
   {
     path: "form",
     loadChildren: () => import('./screens/covid-form-screen/covid-form-screen.module').then(m => m.CovidFormScreenModule)
+  },
+  {
+    path: "fail",
+    loadChildren: () => import('./screens/fail-screen/fail-screen.module').then(m => m.FailScreenModule)
+  },
+  {
+    path: "success",
+    loadChildren: () => import('./screens/success-screen/success-screen.module').then(m => m.SuccessScreenModule)
   }
 ];
 

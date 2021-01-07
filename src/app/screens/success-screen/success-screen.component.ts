@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-success-screen',
   templateUrl: './success-screen.component.html',
   styleUrls: ['./success-screen.component.scss']
 })
-export class SuccessScreenComponent implements OnInit {
+export class SuccessScreenComponent {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  onDone() {
+    this.router.navigateByUrl('/', {replaceUrl: true});
   }
-
 }
+
