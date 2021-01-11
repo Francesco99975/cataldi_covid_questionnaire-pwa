@@ -1,0 +1,41 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background-color: #1413131f;
+}
+
+.install-container {
+  position: absolute;
+  background-color: wheat;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  bottom: 0;
+  width: 100%;
+  height: 35vh;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.caption {
+  font-size: 1.1rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.install-btn {
+  font: inherit;
+  background-color: blue;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  width: 60%;
+  border: none;
+  padding: 0.7rem;
+}

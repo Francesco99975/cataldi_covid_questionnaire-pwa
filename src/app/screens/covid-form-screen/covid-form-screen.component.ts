@@ -61,11 +61,13 @@ export class CovidFormScreenComponent implements OnInit {
           this.form.get("contact").value
       );
 
-      this.http.post("http://localhost:3000/ccq/mail-dev", this.covidForm.toJSON()).subscribe((response) => {
+      this.http.post("https://ink-jazzy-cupboard.glitch.me/ccq/mail-dev", this.covidForm.toJSON()).subscribe((response) => {
         console.log(response);
 
         let ed = new Date();
-        ed.setSeconds(ed.getSeconds() + 20);
+        ed.setHours(ed.getHours() + (24 - ed.getHours()));
+        ed.setMinutes(0);
+        ed.setSeconds(0);
         this.timer.setTimer(true, ed);
 
         if(this.covidForm.passed()) {
