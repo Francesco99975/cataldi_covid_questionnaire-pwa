@@ -1,5 +1,9 @@
 <div class="container">
-    <h1 class="title">Cataldi Covid Questionnaire</h1>
+    <div class="title">
+        <span>Cataldi</span>  
+        <span>Covid</span>
+        <span>Questionnaire</span> 
+     </div>
     <button *ngIf="questionnaireAccess" class="flat-btn" (click)="onStart()">START</button>
     <h2 *ngIf="!questionnaireAccess" class="message">Questionnaire Already Completed Today.</h2>
 </div>

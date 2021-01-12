@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { InfoService } from 'src/app/services/info.service';
 import { TimerService } from 'src/app/services/timer.service';
 import { CovidForm } from './models/covid-form.model';
 
@@ -16,12 +17,12 @@ export class CovidFormScreenComponent implements OnInit {
   form: FormGroup;
   loading: boolean;
 
-  constructor(private router: Router, private http: HttpClient, private timer: TimerService) {
+  constructor(private router: Router, private http: HttpClient, private timer: TimerService, private info: InfoService) {
     this.loading = false;
     this.form = new FormGroup({
-      firstName: new FormControl("", Validators.required),
-      middleName: new FormControl(""),
-      lastName: new FormControl("", Validators.required),
+      firstName: new FormControl(this.info.firstName, Validators.required),
+      middleName: new FormControl(this.info.middleName),
+      lastName: new FormControl(this.info.lastName, Validators.required),
       fever: new FormControl(false),
       breath: new FormControl(false),
       cough: new FormControl(false),
@@ -36,11 +37,11 @@ export class CovidFormScreenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.info.loadInfo();
   }
 
   onSubmit() {
     if(this.form.valid) {
-      this.loading = true;
       let sym: Map<String, boolean> = new Map([
             ["fever", this.form.get("fever").value],
             ["breath", this.form.get("breath").value],
@@ -61,6 +62,14 @@ export class CovidFormScreenComponent implements OnInit {
           this.form.get("contact").value
       );
 
+      let fn:string = this.covidForm.firstName.trim();
+      let mn:string = this.covidForm.middleName.trim();
+      let ln:string = this.covidForm.lastName.trim();
+      console.log(fn);
+
+      this.info.setInfo(fn, mn, ln);
+
+      this.loading = true;
       this.http.post("https://ink-jazzy-cupboard.glitch.me/ccq/mail-dev", this.covidForm.toJSON()).subscribe((response) => {
         console.log(response);
 
@@ -68,7 +77,6 @@ export class CovidFormScreenComponent implements OnInit {
         ed.setHours(ed.getHours() + (24 - ed.getHours()));
         ed.setMinutes(0);
         ed.setSeconds(0);
-        this.timer.setTimer(true, ed);
 
         if(this.covidForm.passed()) {
           this.router.navigateByUrl('/success', {replaceUrl: true});

@@ -28,9 +28,9 @@ export class CovidForm {
 
     toJSON() {
         return {
-            "firstName": this.firstName,
-            "middleName": this.middleName,
-            "lastName": this.lastName,
+            "firstName": this.firstName.trim(),
+            "middleName": this.middleName.trim(),
+            "lastName": this.lastName.trim(),
             "symptoms": {
                 "fever": this.symptoms.get('fever'),
                 "breath": this.symptoms.get('breath'),
