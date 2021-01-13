@@ -1,3 +1,10 @@
+<div class="backdrop" *ngIf="error" (click)="onDismissed()"></div>
+<div class="modal" *ngIf="error">
+  <h1 class="error-title">Something went wrong!</h1>
+  <div class="error-msg">{{ errorMsg }}</div>
+  <button class="dismiss-error" (click)="onDismissed()">Dismiss</button>
+</div>
+
 <div class="loading-container" *ngIf="loading">
     <div class="loadingio-spinner-spin-9crulu7m9iv"><div class="ldio-r6078keeafj">
         <div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div>

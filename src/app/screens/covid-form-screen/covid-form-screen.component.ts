@@ -16,8 +16,16 @@ export class CovidFormScreenComponent implements OnInit {
   covidForm: CovidForm;
   form: FormGroup;
   loading: boolean;
+  error: boolean;
+  errorMsg: string;
 
   constructor(private router: Router, private http: HttpClient, private timer: TimerService, private info: InfoService) {
+    
+  }
+
+  ngOnInit(): void {
+    this.info.loadInfo();
+    this.error = false;
     this.loading = false;
     this.form = new FormGroup({
       firstName: new FormControl(this.info.firstName, Validators.required),
@@ -34,10 +42,6 @@ export class CovidFormScreenComponent implements OnInit {
       travel: new FormControl(false),
       contact: new FormControl(false)
     });
-  }
-
-  ngOnInit(): void {
-    this.info.loadInfo();
   }
 
   onSubmit() {
@@ -70,6 +74,8 @@ export class CovidFormScreenComponent implements OnInit {
       this.info.setInfo(fn, mn, ln);
 
       this.loading = true;
+      //https://ink-jazzy-cupboard.glitch.me/ccq/mail-dev
+      //http://localhost:3000/ccq/mail-dev
       this.http.post("https://ink-jazzy-cupboard.glitch.me/ccq/mail-dev", this.covidForm.toJSON()).subscribe((response) => {
         console.log(response);
 
@@ -78,6 +84,8 @@ export class CovidFormScreenComponent implements OnInit {
         ed.setMinutes(0);
         ed.setSeconds(0);
 
+        this.timer.setTimer(true, ed);
+
         if(this.covidForm.passed()) {
           this.router.navigateByUrl('/success', {replaceUrl: true});
         } else {
@@ -85,8 +93,25 @@ export class CovidFormScreenComponent implements OnInit {
         }
       }, (err) => {
         this.loading = false;
+        this.error = true;
         console.log(err);
+        this.errorMsg = "Email could not be sent to your employer! Please let them know your result, click dismiss to view it.";
       });    
+    }
+  }
+
+  onDismissed() {
+    let ed = new Date();
+    ed.setHours(ed.getHours() + (24 - ed.getHours()));
+    ed.setMinutes(0);
+    ed.setSeconds(0);
+
+    this.timer.setTimer(true, ed);
+
+    if(this.covidForm.passed()) {
+      this.router.navigateByUrl('/success', {replaceUrl: true});
+    } else {
+      this.router.navigateByUrl('/fail', {replaceUrl: true});
     }
   }
 

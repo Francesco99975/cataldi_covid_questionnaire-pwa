@@ -1,9 +1,14 @@
 <div class="container">
     <div class="title">
-        <span>Cataldi</span>  
+        <img src="../../../assets/logo.png" alt="Cataldi-Logo" width="350px" height="150px">
+        <!-- <span>Cataldi</span>   -->
         <span>Covid</span>
         <span>Questionnaire</span> 
      </div>
     <button *ngIf="questionnaireAccess" class="flat-btn" (click)="onStart()">START</button>
     <h2 *ngIf="!questionnaireAccess" class="message">Questionnaire Already Completed Today.</h2>
+    <div class="privacy">
+        <a href="https://www.privacypolicygenerator.info/live.php?token=cci0N6215GweaBrss2bAP9rHhHPzxLmC" target="_blank">Privacy Policy</a>
+        <h1 class="copyright">&copy; 2021 Copyright by Cataldi Fresh Market. All rights reserved.</h1>
+    </div>
 </div>
