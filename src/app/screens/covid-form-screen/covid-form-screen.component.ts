@@ -76,7 +76,7 @@ export class CovidFormScreenComponent implements OnInit {
       this.loading = true;
       //https://ink-jazzy-cupboard.glitch.me/ccq/mail-dev
       //http://localhost:3000/ccq/mail-dev
-      this.http.post("https://ink-jazzy-cupboard.glitch.me/ccq/mail-dev", this.covidForm.toJSON()).subscribe((response) => {
+      this.http.post("https://ink-jazzy-cupboard.glitch.me/ccq/mail", this.covidForm.toJSON()).subscribe((response) => {
         console.log(response);
 
         let ed = new Date();

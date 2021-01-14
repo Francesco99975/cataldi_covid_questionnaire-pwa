@@ -42,6 +42,10 @@
   border-radius: 25px;
   padding: 0.6rem;
 
+  img {
+    margin-bottom: 0.3rem;
+  }
+
   span {
     font-size: 2.2rem;
   }
@@ -66,7 +70,7 @@
   background-color: transparent;
   letter-spacing: 1.3rem;
   text-align: center;
-  color: $primary-color;
+  color: black;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 2.2rem;
