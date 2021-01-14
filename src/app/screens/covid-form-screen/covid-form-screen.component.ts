@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,6 +18,7 @@ export class CovidFormScreenComponent implements OnInit {
   form: FormGroup;
   loading: boolean;
   error: boolean;
+  formError: boolean;
   errorMsg: string;
 
   constructor(private router: Router, private http: HttpClient, private timer: TimerService, private info: InfoService) {
@@ -26,35 +28,36 @@ export class CovidFormScreenComponent implements OnInit {
   ngOnInit(): void {
     this.info.loadInfo();
     this.error = false;
+    this.formError = false;
     this.loading = false;
     this.form = new FormGroup({
       firstName: new FormControl(this.info.firstName, Validators.required),
       middleName: new FormControl(this.info.middleName),
       lastName: new FormControl(this.info.lastName, Validators.required),
-      fever: new FormControl(false),
-      breath: new FormControl(false),
-      cough: new FormControl(false),
-      throat: new FormControl(false),
-      nose: new FormControl(false),
-      taste: new FormControl(false),
-      nausea: new FormControl(false),
-      tiredness: new FormControl(false),
-      travel: new FormControl(false),
-      contact: new FormControl(false)
+      fever: new FormControl('', Validators.required),
+      breath: new FormControl('', Validators.required),
+      cough: new FormControl('', Validators.required),
+      throat: new FormControl('', Validators.required),
+      nose: new FormControl('', Validators.required),
+      taste: new FormControl('', Validators.required),
+      nausea: new FormControl('', Validators.required),
+      tiredness: new FormControl('', Validators.required),
+      travel: new FormControl('', Validators.required),
+      contact: new FormControl('', Validators.required)
     });
   }
 
   onSubmit() {
     if(this.form.valid) {
       let sym: Map<String, boolean> = new Map([
-            ["fever", this.form.get("fever").value],
-            ["breath", this.form.get("breath").value],
-            ["cough", this.form.get("cough").value],
-            ["throat", this.form.get("throat").value],
-            ["nose", this.form.get("nose").value],
-            ["taste", this.form.get("taste").value],
-            ["nausea", this.form.get("nausea").value],
-            ["tiredness", this.form.get("tiredness").value]
+            ["fever", this.form.get("fever").value === 'y' ? true : false],
+            ["breath", this.form.get("breath").value === 'y' ? true : false],
+            ["cough", this.form.get("cough").value === 'y' ? true : false],
+            ["throat", this.form.get("throat").value === 'y' ? true : false],
+            ["nose", this.form.get("nose").value === 'y' ? true : false],
+            ["taste", this.form.get("taste").value === 'y' ? true : false],
+            ["nausea", this.form.get("nausea").value === 'y' ? true : false],
+            ["tiredness", this.form.get("tiredness").value === 'y' ? true : false]
       ]);
 
       this.covidForm = new CovidForm(
@@ -62,8 +65,8 @@ export class CovidFormScreenComponent implements OnInit {
           this.form.get("middleName").value, 
           this.form.get("lastName").value,
           sym,
-          this.form.get("travel").value,
-          this.form.get("contact").value
+          this.form.get("travel").value === 'y' ? true : false,
+          this.form.get("contact").value === 'y' ? true : false
       );
 
       let fn:string = this.covidForm.firstName.trim();
@@ -97,6 +100,9 @@ export class CovidFormScreenComponent implements OnInit {
         console.log(err);
         this.errorMsg = "Email could not be sent to your employer! Please let them know your result, click dismiss to view it.";
       });    
+    } else {
+      this.formError = true;
+      console.log(this.form.get('fever').errors);
     }
   }
 

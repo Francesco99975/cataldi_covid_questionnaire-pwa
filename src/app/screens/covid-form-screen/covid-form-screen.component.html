@@ -112,131 +112,251 @@
         <h2 class="category">Personal Information</h2>
         
         <div class="form__group">
-            <input class="form__field" type="text" name="fn" id="fn" placeholder="First Name" formControlName="firstName">
+            <input [ngClass]="{'form-error': form.get('firstName').errors && formError}" class="form__field" type="text" name="fn" id="fn" placeholder="First Name" formControlName="firstName" >
             <label class="form__label" for="fn">First Name</label>
         </div>
 
-        <div class="form__group">
+        <div [ngClass]="{'form-error': form.get('middleName').errors && formError}" class="form__group">
             <input class="form__field" type="text" name="mn" id="mn" placeholder="Middle Name" formControlName="middleName">
             <label class="form__label" for="mn">Middle Name</label>
         </div>
 
         <div class="form__group">
-            <input class="form__field" type="text" name="ln" id="ln" placeholder="Last Name" formControlName="lastName">
+            <input [ngClass]="{'form-error': form.get('lastName').errors && formError}" class="form__field" type="text" name="ln" id="ln" placeholder="Last Name" formControlName="lastName">
             <label class="form__label" for="ln">Last Name</label>
         </div>
 
         <h2 class="category">Symptoms</h2>
         <div class="question">
-            <label class="symptom__label" for="fever">Fever or Chills</label>
+            <label class="symptom__label" for="fever" [ngClass]="{'form-error': form.get('fever').errors && formError}">Fever or Chills</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="fever" formControlName="fever"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="fever" formControlName="fever"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="fever" id="fever" formControlName="fever">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="breath">Difficulty breathing or shortness of breath</label>
+            <label class="symptom__label" for="breath" [ngClass]="{'form-error': form.get('breath').errors && formError}">Difficulty breathing or shortness of breath</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="breath" formControlName="breath"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="breath" formControlName="breath"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="breath" id="breath" formControlName="breath">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="cough">Cough</label>
+            <label class="symptom__label" for="cough" [ngClass]="{'form-error': form.get('cough').errors && formError}">Cough</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="cough" formControlName="cough"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="cough" formControlName="cough"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="cough" id="cough" formControlName="cough">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="throat">Sore Throat, trouble swallowing</label>
+            <label class="symptom__label" for="throat" [ngClass]="{'form-error': form.get('throat').errors && formError}">Sore Throat, trouble swallowing</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="throat" formControlName="throat"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="throat" formControlName="throat"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="throat" id="throat" formControlName="throat">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="nose">Runny nose / stuffy nose or nasal congestion</label>
+            <label class="symptom__label" for="nose" [ngClass]="{'form-error': form.get('nose').errors && formError}">Runny nose / stuffy nose or nasal congestion</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="nose" formControlName="nose"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="nose" formControlName="nose"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="nose" id="nose" formControlName="nose">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="taste">Decrease or loss of smell or taste</label>
+            <label class="symptom__label" for="taste" [ngClass]="{'form-error': form.get('taste').errors && formError}">Decrease or loss of smell or taste</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="taste" formControlName="taste"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="taste" formControlName="taste"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="taste" id="taste" formControlName="taste">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="nausea">Nausea, vomiting, diarrhea, abdominal pain</label>
+            <label class="symptom__label" for="nausea" [ngClass]="{'form-error': form.get('nausea').errors && formError}">Nausea, vomiting, diarrhea, abdominal pain</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="nausea" formControlName="nausea"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="nausea" formControlName="nausea"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="nausea" id="nausea" formControlName="nausea">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <div class="question">
-            <label class="symptom__label" for="tiredness">Not feeling well, extreme tiredness, sore muscles</label>
+            <label class="symptom__label" for="tiredness" [ngClass]="{'form-error': form.get('tiredness').errors && formError}">Not feeling well, extreme tiredness, sore muscles</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="tiredness" formControlName="tiredness"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="tiredness" formControlName="tiredness"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="tiredness" id="tiredness" formControlName="tiredness">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <h2 class="category">Travel</h2>
         <div class="question">
-            <label class="symptom__label" for="travel">Have you travelled outside Canada in the past 14 days ?</label>
+            <label class="symptom__label" for="travel" [ngClass]="{'form-error': form.get('travel').errors && formError}">Have you travelled outside Canada in the past 14 days ?</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="travel" formControlName="travel"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="travel" formControlName="travel"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="travel" id="travel" formControlName="travel">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <h2 class="category">Contact</h2>
         <div class="question">
-            <label class="symptom__label" for="contact">Have you had close contact with a confirmed or probable case of COVID-19 ?</label>
+            <label class="symptom__label" for="contact" [ngClass]="{'form-error': form.get('contact').errors && formError}">Have you had close contact with a confirmed or probable case of COVID-19 ?</label>
 
-            <label class="checkbox bounce">
+            <div class="radios">
+              <label class="opt-label">
+                <input type="radio" value="y" class="option-input radio" name="contact" formControlName="contact"/>
+                Yes
+              </label>
+  
+              <label class="opt-label">
+                <input type="radio" value="n" class="option-input radio no" name="contact" formControlName="contact"/>
+                No
+              </label>
+            </div>
+
+            <!-- <label class="checkbox bounce">
                 <input type="checkbox" name="contact" id="contact" formControlName="contact">
                 <svg viewBox="0 0 21 21">
                     <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
                 </svg>
-            </label>
+            </label> -->
         </div>
 
         <button type="submit">Submit</button>
