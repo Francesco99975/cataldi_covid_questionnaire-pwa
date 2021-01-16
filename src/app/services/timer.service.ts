@@ -15,10 +15,15 @@ export class TimerService {
 
   loadTimer() {
     try {
+      if(localStorage.getItem(this.STATUS_KEY) == null) {
+        this.completed = false;
+        return;
+      }
       this.completed = localStorage.getItem(this.STATUS_KEY) === "1" ? true : false;
       this.expiryDate = localStorage.getItem(this.EXPIRY_KEY) != '' ?  new Date(localStorage.getItem(this.EXPIRY_KEY)) : null;
       if (this.expiryDate != null) this.autoWatcher();
     } catch (error) {
+      this.completed = false;
       console.log(error.message);
     }
   }
